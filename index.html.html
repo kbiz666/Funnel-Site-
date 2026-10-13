@@ -20,9 +20,14 @@
       --bg:           #0B0C0F;
       --surface:      #131519;
       --surface-2:    #1A1C21;
-      --gold:         #C8A84B;
-      --gold-dim:     rgba(200,168,75,0.12);
-      --gold-border:  rgba(200,168,75,0.3);
+      --gold:         #FFF200;  /* Ferrari yellow: highlights */
+      --gold-dim:     rgba(255,242,0,0.10);
+      --gold-border:  rgba(255,242,0,0.30);
+      --red:          #D7141A;  /* racing red: primary accent */
+      --red-dark:     #A50D12;
+      --red-dim:      rgba(215,20,26,0.12);
+      --red-border:   rgba(215,20,26,0.40);
+      --hdr-h:        80px;
       --text:         #EEEBE3;
       --text-muted:   #7A7672;
       --border:       #25272B;
@@ -80,8 +85,8 @@
       display: inline-flex;
       align-items: center;
       gap: 0.5rem;
-      background: var(--gold);
-      color: #0A0B0D;
+      background: var(--red);
+      color: #FFFFFF;
       font-family: var(--font-b);
       font-size: 0.875rem;
       font-weight: 600;
@@ -93,7 +98,7 @@
       text-decoration: none;
       transition: background 0.2s, transform 0.15s;
     }
-    .btn:hover  { background: #d9b855; transform: translateY(-1px); }
+    .btn:hover  { background: var(--red-dark); transform: translateY(-1px); }
     .btn:active { transform: translateY(0); }
     .btn-note   { font-size: 0.75rem; color: var(--text-muted); margin-top: 0.75rem; }
 
@@ -131,7 +136,7 @@
       right: -8%;
       width: 55%;
       height: 110%;
-      background: radial-gradient(ellipse at 60% 40%, rgba(200,168,75,0.07) 0%, transparent 65%);
+      background: radial-gradient(ellipse at 60% 40%, rgba(255,242,0,0.07) 0%, transparent 65%);
       pointer-events: none;
     }
 
@@ -175,7 +180,7 @@
     .hero-bullets li::before {
       content: '';
       width: 4px; height: 4px;
-      background: var(--gold);
+      background: var(--red);
       border-radius: 50%;
       flex-shrink: 0;
     }
@@ -192,7 +197,7 @@
     .repair-card {
       background: var(--surface-2);
       border: 1px solid var(--border);
-      border-left: 2px solid var(--gold);
+      border-left: 2px solid var(--red);
       padding: 1rem 1.15rem;
       border-radius: 2px;
     }
@@ -267,7 +272,7 @@
       color: var(--text);
       line-height: 1.1;
       padding: 1.5rem 1.75rem;
-      border-left: 3px solid var(--gold);
+      border-left: 3px solid var(--red);
       background: var(--gold-dim);
       margin: 0 0 1.75rem;
     }
@@ -308,7 +313,7 @@
       border-left: 2px solid var(--gold-border);
       padding: 0.4rem 0.8rem;
       margin-top: 0.75rem;
-      background: rgba(200,168,75,0.05);
+      background: rgba(255,242,0,0.05);
       display: inline-block;
     }
 
@@ -418,7 +423,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 40%, rgba(200,168,75,0.09) 0%, transparent 65%);
+      background: radial-gradient(ellipse at 50% 40%, rgba(255,242,0,0.09) 0%, transparent 65%);
       pointer-events: none;
     }
     .offer-nums {
@@ -543,7 +548,7 @@
     .qual-note {
       padding: 1.25rem 1.5rem;
       border: 1px solid var(--gold-border);
-      background: rgba(200,168,75,0.04);
+      background: rgba(255,242,0,0.04);
       border-radius: 2px;
       font-size: 0.875rem;
       color: var(--text-muted);
@@ -565,8 +570,8 @@
       border: 1px solid var(--border);
     }
     .risk-box.miss {
-      background: rgba(200,168,75,0.04);
-      border: 1px solid var(--gold-border);
+      background: rgba(255,242,0,0.04);
+      border: 1px solid var(--red-border);
     }
     .risk-lbl {
       font-size: 0.68rem;
@@ -607,7 +612,7 @@
       content: '';
       position: absolute;
       inset: 0;
-      background: radial-gradient(ellipse at 50% 30%, rgba(200,168,75,0.08) 0%, transparent 60%);
+      background: radial-gradient(ellipse at 50% 30%, rgba(255,242,0,0.08) 0%, transparent 60%);
       pointer-events: none;
     }
     #final-cta h2 { max-width: 680px; margin: 0 auto 1rem; }
@@ -699,9 +704,162 @@
       html { scroll-behavior: auto; }
       .btn, .future-item { transition: none; }
     }
+
+    /* ══════════════════════════════════════
+       HEADER · NAV · GEAR-SHIFT PROGRESS
+    ══════════════════════════════════════ */
+    body { padding-top: var(--hdr-h); }
+    section[id] { scroll-margin-top: calc(var(--hdr-h) + 12px); }
+
+    .site-header {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(11,12,15,0.94);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-inner {
+      max-width: 1040px;
+      margin: 0 auto;
+      padding: 0 var(--px);
+      height: 56px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+    }
+    .nav-brand {
+      font-family: var(--font-d);
+      font-size: 1rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text);
+      text-decoration: none;
+      white-space: nowrap;
+      flex-shrink: 0;
+    }
+    .nav-brand span { color: var(--gold); }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 1.4rem;
+      overflow-x: auto;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .nav-links::-webkit-scrollbar { display: none; }
+    .nav-links a {
+      position: relative;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 0.35rem 0;
+      transition: color 0.2s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0; bottom: -2px;
+      height: 2px;
+      background: var(--red);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.25s ease;
+    }
+    .nav-links a:hover,
+    .nav-links a:focus-visible { color: var(--text); outline: none; }
+    .nav-links a:hover::after,
+    .nav-links a:focus-visible::after { transform: scaleX(1); }
+
+    .scroll-progress {
+      position: relative;
+      height: 24px;
+      background: var(--bg);
+    }
+    .sp-track {
+      position: absolute;
+      left: 12px; right: 12px;
+      top: 50%;
+      height: 3px;
+      transform: translateY(-50%);
+      background: var(--surface-2);
+      border-radius: 2px;
+    }
+    .sp-fill {
+      position: absolute;
+      left: 0; top: 0; bottom: 0;
+      width: 0%;
+      background: var(--red);
+      border-radius: 2px;
+    }
+    .sp-knob {
+      position: absolute;
+      top: 50%;
+      left: 0%;
+      width: 24px;
+      height: 24px;
+      transform: translate(-50%, -50%);
+      border-radius: 50%;
+      background: radial-gradient(circle at 34% 30%, #FFFBB3 0%, var(--gold) 45%, #B9B100 100%);
+      box-shadow: 0 0 0 2px var(--bg), 0 2px 8px rgba(0,0,0,0.6);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-family: var(--font-d);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+      color: #0B0C0F;
+      pointer-events: none;
+    }
+
+    @media (max-width: 720px) {
+      .nav-brand { display: none; }
+      .nav-inner { justify-content: flex-start; gap: 0; }
+      .nav-links { width: 100%; gap: 1.1rem; }
+      .nav-links a { font-size: 0.66rem; }
+    }
+    @media (max-width: 380px) {
+      .nav-links { gap: 0.9rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .nav-links a::after { transition: none; }
+      .nav-links a { transition: none; }
+    }
   </style>
 </head>
 <body>
+
+<!-- ════════════════════════════════════
+     HEADER · NAVIGATION · SCROLL PROGRESS
+════════════════════════════════════ -->
+<header class="site-header" id="siteHeader">
+  <div class="nav-inner">
+    <a href="#hero" class="nav-brand">Booked Repair <span>System</span></a>
+    <nav class="nav-links" aria-label="Page sections">
+      <a href="#problem">The Problem</a>
+      <a href="#mechanism">How It Works</a>
+      <a href="#credibility">How I Work</a>
+      <a href="#offer">The Guarantee</a>
+      <a href="#qualification">Who It&rsquo;s For</a>
+      <a href="#risk">Risk Reversal</a>
+    </nav>
+  </div>
+  <div class="scroll-progress" aria-hidden="true">
+    <div class="sp-track">
+      <div class="sp-fill" id="spFill"></div>
+      <div class="sp-knob" id="spKnob"><span id="spGear">N</span></div>
+    </div>
+  </div>
+</header>
+
 
 <!-- ════════════════════════════════════
      1. HERO
@@ -1156,6 +1314,46 @@
       });
     }, { threshold: 0.08, rootMargin: '0px 0px -36px 0px' });
     els.forEach(function (el) { obs.observe(el); });
+  })();
+</script>
+
+<script>
+  (function () {
+    var fill = document.getElementById('spFill');
+    var knob = document.getElementById('spKnob');
+    var gear = document.getElementById('spGear');
+    var gears = ['N', '1', '2', '3', '4', '5', '6'];
+    var lastGear = null;
+    var ticking = false;
+
+    function update() {
+      ticking = false;
+      var root = document.documentElement;
+      var max = root.scrollHeight - root.clientHeight;
+      var y = window.pageYOffset || root.scrollTop || 0;
+      var pct = max > 0 ? (y / max) * 100 : 0;
+      pct = Math.max(0, Math.min(100, pct));
+
+      fill.style.width = pct + '%';
+      knob.style.left = pct + '%';
+
+      var g = gears[Math.min(6, Math.floor(pct / 15))];
+      if (g !== lastGear) {
+        gear.textContent = g;
+        lastGear = g;
+      }
+    }
+
+    function requestUpdate() {
+      if (!ticking) {
+        ticking = true;
+        window.requestAnimationFrame(update);
+      }
+    }
+
+    window.addEventListener('scroll', requestUpdate, { passive: true });
+    window.addEventListener('resize', requestUpdate);
+    update();
   })();
 </script>
 
