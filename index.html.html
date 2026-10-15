@@ -1034,6 +1034,98 @@
     @media (prefers-reduced-motion: reduce) {
       .brand-link, .brand-link::after { transition: none; }
     }
+
+    /* Repair revenue estimator */
+    .rev-section { padding: clamp(4rem, 9vw, 7rem) 0; }
+    .rev-head { text-align: center; margin-bottom: 2.5rem; }
+    .rev-eyebrow { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.75rem; }
+    .rev-title { font-family: var(--font-d); font-size: clamp(1.8rem, 4vw, 2.6rem); font-weight: 800; color: var(--text); line-height: 1.15; margin-bottom: 0.75rem; }
+    .rev-sub { color: var(--text-muted); font-size: 0.98rem; }
+    .rev-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: clamp(1.25rem, 3vw, 2rem);
+      display: grid;
+      grid-template-columns: 1.1fr 1fr;
+      gap: 2rem;
+      align-items: start;
+    }
+    .rev-field { margin-bottom: 1.75rem; }
+    .rev-field:last-child { margin-bottom: 0; }
+    .rev-row { display: flex; align-items: center; justify-content: space-between; gap: 1rem; margin-bottom: 0.85rem; }
+    .rev-label { font-weight: 700; color: var(--text); font-size: 0.95rem; }
+    .rev-badge {
+      font-family: var(--font-d);
+      font-weight: 800;
+      font-size: 1rem;
+      color: var(--red);
+      background: var(--red-dim);
+      border: 1px solid var(--red-border);
+      border-radius: 8px;
+      padding: 0.3rem 0.7rem;
+      white-space: nowrap;
+    }
+    .rev-badge.red { color: var(--red); background: var(--red-dim); border-color: var(--red-border); }
+    .rev-range {
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 6px;
+      border-radius: 3px;
+      background: linear-gradient(to right, var(--red) 0%, var(--red) var(--fill, 50%), var(--surface-2) var(--fill, 50%), var(--surface-2) 100%);
+      outline: none;
+      cursor: pointer;
+    }
+    .rev-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 20px; height: 20px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--red);
+      box-shadow: 0 0 0 4px rgba(215,20,26,0.18);
+      cursor: pointer;
+    }
+    .rev-range::-moz-range-thumb {
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: 2px solid var(--red);
+      cursor: pointer;
+    }
+    .rev-range:focus-visible::-webkit-slider-thumb { box-shadow: 0 0 0 5px var(--gold-border); }
+    .rev-minmax { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem; }
+    .rev-divider { height: 1px; background: var(--border); margin: 1.75rem 0; }
+    .rev-result {
+      background: var(--surface-2);
+      border: 1px solid var(--red-border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+    .rev-result-lbl { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--text-muted); }
+    .rev-big { font-family: var(--font-d); font-size: clamp(2.2rem, 5vw, 2.9rem); font-weight: 800; color: #22C55E; line-height: 1.1; margin: 0.5rem 0 0.25rem; }
+    .rev-per { color: var(--red); font-size: 0.9rem; font-weight: 600; }
+    .rev-hr { height: 1px; background: var(--border); margin: 1.25rem 0; }
+    .rev-stat-lbl { font-size: 0.85rem; color: var(--text-muted); }
+    .rev-stat-val { font-family: var(--font-d); font-size: 1.3rem; font-weight: 800; color: var(--text); margin: 0.2rem 0 1rem; }
+    .rev-stat-val.annual { color: var(--gold); }
+    .rev-reset {
+      width: 100%;
+      margin-top: 0.5rem;
+      background: transparent;
+      color: var(--text);
+      border: 1px solid var(--border-strong, var(--border));
+      border-radius: 8px;
+      padding: 0.7rem 1rem;
+      font: 700 0.88rem var(--font-b, inherit);
+      cursor: pointer;
+      transition: border-color 0.2s, color 0.2s;
+    }
+    .rev-reset:hover, .rev-reset:focus-visible { border-color: var(--red); color: var(--red); outline: none; }
+    .rev-note { margin-top: 1.5rem; font-size: 0.75rem; color: var(--text-muted); text-align: center; line-height: 1.6; }
+    @media (max-width: 720px) {
+      .rev-card { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
@@ -1101,7 +1193,7 @@
     </ul>
 
     <div class="r d3">
-      <a href="https://calendly.com/ks995419/new-meeting" class="btn" target="_blank" rel="noopener">
+      <a href="https://calendly.com/ks995419/new-meeting-3" class="btn" target="_blank" rel="noopener">
         SCHEDULE CALL &nbsp;&rarr;
       </a>
       <p class="btn-note">For independent auto repair shops in the USA.</p>
@@ -1271,6 +1363,69 @@
 
 
 <!-- ════════════════════════════════════
+     REPAIR REVENUE ESTIMATOR
+════════════════════════════════════ -->
+<section class="rev-section" id="estimator" aria-labelledby="rev-title">
+  <div class="wrap">
+    <div class="rev-head">
+      <div class="rev-eyebrow">Repair Revenue Estimator</div>
+      <h2 class="rev-title" id="rev-title">Calculate Your Potential Monthly Revenue</h2>
+      <p class="rev-sub">See what additional high-value repair appointments could mean for your auto shop.</p>
+    </div>
+
+    <div class="rev-card">
+      <div>
+        <div class="rev-field">
+          <div class="rev-row">
+            <span class="rev-label">Booked Repair Appointments / Month</span>
+            <span class="rev-badge" id="revApptBadge">15 appointments</span>
+          </div>
+          <input type="range" class="rev-range" id="revAppt" min="5" max="40" step="1" value="15" aria-label="Booked repair appointments per month">
+          <div class="rev-minmax"><span>5 appointments</span><span>40 appointments</span></div>
+        </div>
+
+        <div class="rev-divider"></div>
+
+        <div class="rev-field">
+          <div class="rev-row">
+            <span class="rev-label">Average Repair Invoice</span>
+            <span class="rev-badge red" id="revInvBadge">$2,000</span>
+          </div>
+          <input type="range" class="rev-range" id="revInv" min="500" max="5000" step="100" value="2000" aria-label="Average repair invoice">
+          <div class="rev-minmax"><span>$500</span><span>$5,000</span></div>
+        </div>
+
+        <div class="rev-divider"></div>
+
+        <div class="rev-field">
+          <div class="rev-row">
+            <span class="rev-label">Appointment-to-Paid-Job Rate</span>
+            <span class="rev-badge" id="revRateBadge">40%</span>
+          </div>
+          <input type="range" class="rev-range" id="revRate" min="10" max="80" step="1" value="40" aria-label="Appointment to paid job rate">
+          <div class="rev-minmax"><span>10%</span><span>80%</span></div>
+        </div>
+      </div>
+
+      <div class="rev-result" aria-live="polite">
+        <div class="rev-result-lbl">Estimated Additional Monthly Revenue</div>
+        <div class="rev-big" id="revMonthly">$12,000</div>
+        <div class="rev-per">per month</div>
+        <div class="rev-hr"></div>
+        <div class="rev-stat-lbl">Estimated paid repair jobs</div>
+        <div class="rev-stat-val" id="revJobs">6 jobs</div>
+        <div class="rev-stat-lbl">Annualized revenue at this pace</div>
+        <div class="rev-stat-val annual" id="revAnnual">$144,000</div>
+        <button type="button" class="rev-reset" id="revReset">Reset Calculator</button>
+      </div>
+    </div>
+
+    <p class="rev-note">Illustrative estimate, not a revenue guarantee. Uses rounded whole repair jobs and gross repair sales, not profit. Actual results depend on customer attendance, vehicle diagnosis, quote acceptance, shop capacity, and repair value.</p>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════
      5. CREDIBILITY
 ════════════════════════════════════ -->
 <section id="credibility" class="sec">
@@ -1402,7 +1557,7 @@
     <br>
 
     <div class="r">
-      <a href="https://calendly.com/ks995419/new-meeting" class="btn" target="_blank" rel="noopener">
+      <a href="https://calendly.com/ks995419/new-meeting-3" class="btn" target="_blank" rel="noopener">
         SCHEDULE CALL &nbsp;&rarr;
       </a>
     </div>
@@ -1505,7 +1660,7 @@
     </div>
 
     <div class="r">
-      <a href="https://calendly.com/ks995419/new-meeting" class="btn" target="_blank" rel="noopener"
+      <a href="https://calendly.com/ks995419/new-meeting-3" class="btn" target="_blank" rel="noopener"
          style="font-size:0.95rem; padding:1.1rem 2.25rem;">
         SCHEDULE CALL &nbsp;&rarr;
       </a>
@@ -1663,6 +1818,48 @@
     window.addEventListener('scroll', request, { passive: true });
     window.addEventListener('resize', request);
     setActive();
+  })();
+</script>
+
+<script>
+  (function () {
+    var defaults = { appt: 15, inv: 2000, rate: 40 };
+    var appt = document.getElementById('revAppt');
+    var inv = document.getElementById('revInv');
+    var rate = document.getElementById('revRate');
+    var fmt = function (n) { return '$' + Math.round(n).toLocaleString('en-US'); };
+
+    function paint(el) {
+      var pct = (el.value - el.min) / (el.max - el.min) * 100;
+      el.style.setProperty('--fill', pct + '%');
+    }
+
+    function update() {
+      var a = parseInt(appt.value, 10);
+      var v = parseInt(inv.value, 10);
+      var r = parseInt(rate.value, 10);
+      var jobs = Math.round(a * (r / 100));
+      var monthly = jobs * v;
+
+      document.getElementById('revApptBadge').textContent = a + ' appointments';
+      document.getElementById('revInvBadge').textContent = fmt(v);
+      document.getElementById('revRateBadge').textContent = r + '%';
+      document.getElementById('revMonthly').textContent = fmt(monthly);
+      document.getElementById('revJobs').textContent = jobs + (jobs === 1 ? ' job' : ' jobs');
+      document.getElementById('revAnnual').textContent = fmt(monthly * 12);
+      [appt, inv, rate].forEach(paint);
+    }
+
+    [appt, inv, rate].forEach(function (el) { el.addEventListener('input', update); });
+
+    document.getElementById('revReset').addEventListener('click', function () {
+      appt.value = defaults.appt;
+      inv.value = defaults.inv;
+      rate.value = defaults.rate;
+      update();
+    });
+
+    update();
   })();
 </script>
 
