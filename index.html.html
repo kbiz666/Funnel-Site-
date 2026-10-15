@@ -784,6 +784,7 @@
       background: var(--bg);
     }
     .sp-track {
+      cursor: pointer;
       position: absolute;
       left: 12px; right: 34px;
       top: 50%;
@@ -1159,6 +1160,24 @@
     @media (max-width: 720px) {
       .about-card { grid-template-columns: 1fr; justify-items: center; text-align: center; }
       .about-photo { width: 200px; height: 200px; }
+    }
+
+    /* Calculator checkpoint label */
+    .sp-cp-label {
+      position: absolute;
+      top: 14px;
+      left: 50%;
+      transform: translateX(-50%);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--text);
+      background: var(--bg);
+      border: 1px solid var(--red-border);
+      border-radius: 4px;
+      padding: 3px 7px;
+      white-space: nowrap;
+      pointer-events: none;
     }
   </style>
 </head>
@@ -1765,6 +1784,46 @@
   (function () {
     var fill = document.getElementById('spFill');
     var bar = document.querySelector('.scroll-progress');
+    var track = document.querySelector('.sp-track');
+    var calcCp = document.createElement('span');
+    calcCp.className = 'sp-cp';
+    calcCp.setAttribute('aria-hidden', 'true');
+    calcCp.innerHTML = '<span class="sp-cp-label">+$ per month</span>';
+    track.appendChild(calcCp);
+
+    function placeCalcCheckpoint() {
+      var card = document.querySelector('.rev-card');
+      if (!card) return;
+      var root = document.documentElement;
+      var max = root.scrollHeight - root.clientHeight;
+      var header = document.getElementById('siteHeader');
+      var hdr = header ? header.offsetHeight : 80;
+      var cardTop = card.getBoundingClientRect().top + (window.pageYOffset || 0);
+      var target = cardTop - hdr - 16;
+      var pct = max > 0 ? (target / max) * 100 : 0;
+      pct = Math.max(0, Math.min(100, pct));
+      calcCp.style.left = pct + '%';
+      calcCp.setAttribute('data-at', pct.toFixed(2));
+    }
+    placeCalcCheckpoint();
+
+    function scrollToPct(p) {
+      var root = document.documentElement;
+      var max = root.scrollHeight - root.clientHeight;
+      window.scrollTo({ top: max * Math.max(0, Math.min(100, p)) / 100, behavior: 'smooth' });
+    }
+
+    track.addEventListener('click', function (e) {
+      var cp = e.target.closest ? e.target.closest('.sp-cp') : null;
+      if (cp) {
+        scrollToPct(parseFloat(cp.getAttribute('data-at')));
+        return;
+      }
+      var rect = track.getBoundingClientRect();
+      var ratio = (e.clientX - rect.left) / rect.width;
+      scrollToPct(ratio * 100);
+    });
+
     var checkpoints = document.querySelectorAll('.sp-cp');
     var pulseTimer = null;
     var confettiColors = ['#22C55E', '#FFF200', '#D7141A', '#FFFFFF'];
@@ -1842,7 +1901,7 @@
     }
 
     window.addEventListener('scroll', requestUpdate, { passive: true });
-    window.addEventListener('resize', requestUpdate);
+    window.addEventListener('resize', function () { placeCalcCheckpoint(); requestUpdate(); });
     update();
   })();
 </script>
